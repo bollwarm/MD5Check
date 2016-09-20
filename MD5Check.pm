@@ -119,7 +119,7 @@ MD5Check is not standardized. This module is far from complete.
 
 =head1 Git repo
 
-L<http://github.com/a3f/MD5Check>
+L<https://github.com/bollwarm/MD5Check>
 
 =head1 AUTHOR
 
