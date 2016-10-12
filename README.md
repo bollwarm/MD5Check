@@ -1,6 +1,4 @@
 # MD5Check
-MD5Check - A Tool using it for init Web files's md5 values of your site(or other dir), and check if it changed
-
 
 =head1 NAME
  
@@ -19,7 +17,8 @@ MD5Check - Use it for init Web files's md5 values of your site(or other dir), an
     md5check($mydir);
 
     # oneliner
-    $ perl -MMD5Check -e ' md5init("/web")' >file
+
+    $ perl -MMD5Check -e 'md5init("/web")' >file
     $ perl -MMD5Check -e 'md5check(file)'
  
 =head1 DESCRIPTION

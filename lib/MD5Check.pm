@@ -11,11 +11,11 @@ MD5Check -  Use it for init Web files's md5 values of your site(or other dir), a
 
 =head1 VERSION
 
-Version 0.03
+Version 0.04
 
 =cut
 
-our $VERSION = '0.03';
+our $VERSION = '0.04';
 
 
 =head1 SYNOPSIS
@@ -145,7 +145,7 @@ MD5Check is not standardized. This module is far from complete.
 
 =head1 Git repo
 
-L<http://github.com/a3f/MD5Check>
+L<https://github.com/bollwarm/MD5Check.git>
 
 =head1 AUTHOR
 
