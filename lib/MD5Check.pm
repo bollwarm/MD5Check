@@ -5,6 +5,7 @@ use warnings;
 
 our @ISA     = qw(Exporter);
 our @EXPORT  = qw(md5init md5check);
+
 =head1 NAME
 
 MD5Check -  Use it for init Web files's md5 values of your site(or other dir), and check if it changed!
@@ -20,17 +21,19 @@ our $VERSION = '0.04';
 
 =head1 SYNOPSIS
 
-    e MD5Check;
+   use MD5Check;
 
     my $mydir=shift;
     md5init($mydir);
 
-    use MD5Check;
+   use MD5Check;
+   
     my $mydir=shift;
     md5check($mydir);
 
-    # oneliner
-    $ perl -MMD5Check -e ' md5init("/web")' >file
+# perl oneliner
+
+    $ perl -MMD5Check -e 'md5init("/web")' >file
     $ perl -MMD5Check -e 'md5check(file)'..
 
 
@@ -104,27 +107,6 @@ sub md5init {
 
 1;
 __END__
-
-
-=head1 NAME
-
-MD5Check - Use it for init Web files's md5 values of your site(or other dir), and check if it changed.
-
-
-=head1 SYNOPSIS
-
-    use MD5Check;
-
-    my $mydir=shift;
-    md5init($mydir);
-
-    use MD5Check;
-    my $mydir=shift;
-    md5check($mydir);
-
-    # oneliner
-    $ perl -MMD5Check -e ' md5init("/web")' >file
-    $ perl -MMD5Check -e 'md5check(file)'
 
 =head1 DESCRIPTION
 
