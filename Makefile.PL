@@ -8,7 +8,7 @@ WriteMakefile(
     AUTHOR           => q{orange <linzhe@ijz.me>},
     VERSION_FROM     => 'lib/MD5Check.pm',
     ABSTRACT_FROM    => 'lib/MD5Check.pm',
-    LICENSE          => 'artistic_2',
+    LICENSE          => 'Perl',
     PL_FILES         => {},
     MIN_PERL_VERSION => 5.006,
     CONFIGURE_REQUIRES => {

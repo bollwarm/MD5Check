@@ -2,6 +2,9 @@ package MD5Check;
 
 use strict;
 use warnings;
+use utf8;
+
+require Exporter;
 
 our @ISA     = qw(Exporter);
 our @EXPORT  = qw(md5init md5check);
@@ -10,31 +13,38 @@ our @EXPORT  = qw(md5init md5check);
 
 MD5Check -  Use it for init Web files's md5 values of your site(or other dir), and check if it changed!
 
+检查web目录（或者其他重要系统目录）md5值，当目录文件变化提醒。用于文件防篡改。
+
 =head1 VERSION
 
-Version 0.04
+Version 0.05
 
 =cut
 
-our $VERSION = '0.04';
+our $VERSION = '0.05';
 
 
 =head1 SYNOPSIS
 
-   use MD5Check;
+    e MD5Check;
+
+## 初始化目录md5值,参数为要监控的目录
 
     my $mydir=shift;
     md5init($mydir);
 
-   use MD5Check;
-   
+## 对目录文件进行检查，只需输入之前保存的md5 文件值。
+
+    use MD5Check;
     my $mydir=shift;
     md5check($mydir);
 
-# perl oneliner
+    # oneliner，perl单行程序实现功能。
+
+需要安装该模块，简单通过 cpanm MD5Check 安装。
 
     $ perl -MMD5Check -e 'md5init("/web")' >file
-    $ perl -MMD5Check -e 'md5check(file)'..
+    $ perl -MMD5Check -e 'md5check(file) perl -MMD5Check -e 'md5check(file)'..
 
 
 =cut
