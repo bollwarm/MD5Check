@@ -26,7 +26,7 @@ our $VERSION = '0.05';
 
 =head1 SYNOPSIS
 
-    e MD5Check;
+    use MD5Check;
 
 ## 初始化目录md5值,参数为要监控的目录
 

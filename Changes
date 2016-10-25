@@ -1,14 +1,18 @@
 Revision history for MD5Check
 
+0.05    2016-10-25/20
+
+* 增加中文文档说明
+
 0.04    2016-10-20/20
 
-        some changes
+*some changes
 
 0.03    2016-10-08/09
 
-        version 0.03 and for project files for cpan.
+*version 0.03 and for project files for cpan.
 
 0.01    2016-09-20/
 
-        First version, released on an unsuspecting world.
+*First version, released on an unsuspecting world.
 
