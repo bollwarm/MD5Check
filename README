@@ -15,13 +15,16 @@ MD5Check - Use it for init Web files's md5 values of your site(or other dir), an
     my $mydir=shift;
     md5init($mydir);
 
+##生成执行文件，保存为fileinit.pl然后执行 perl fileinit.pl web目录  > webmd5-20160920
 ## 对目录文件进行检查，只需输入之前保存的md5 文件值。
 
     use MD5Check;
     my $mydir=shift; 
     md5check($mydir);
 
-    # oneliner，perl单行程序实现功能。
+## perl filemd5check.pl  webmd5-20160920。
+
+## oneliner，perl单行程序实现功能。
 
 需要安装该模块，简单通过 cpanm MD5Check 安装。
 
@@ -35,24 +38,14 @@ MD5Check - Use it for init Web files's md5 values of your site(or other dir), an
 MD5Check is not standardized. This module is far from complete.
  
  
-=head2 IMPLEMENTATION
      
-    use MD5Check;
- 
-    my $mydir=shift;
-    md5init($mydir);
- 
-    use MD5Check;
-    my $mydir=shift; 
-    md5check($mydir);
-
 =head1 Git repo
  
 [github](https://github.com/bollwarm/MD5Check)
  
 =head1 AUTHOR
  
-[orange] (linzhe@ijz.me),[blog](http://ijz.me)
+[orange] <linzhe@ijz.me>,[blog](http://ijz.me)
  
 =head1 COPYRIGHT AND LICENSE
  

@@ -127,9 +127,13 @@ MD5Check is not standardized. This module is far from complete.
 
 =head2 IMPLEMENTATION
 
+#Init the web dir md5 values
+
     use MD5Check;
     my $mydir=shift;
     md5init($mydir);
+=====================
+#check files 
 
     use MD5Check;
     my $mydir=shift;
