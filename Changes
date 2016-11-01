@@ -1,5 +1,10 @@
 Revision history for MD5Check
 
+0.06    2016-11-1/19
+
+* change the outer of function.
+* Add bin/ for the tools.
+
 0.05    2016-10-25/20
 
 * 增加中文文档说明

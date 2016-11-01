@@ -1,3 +1,5 @@
+bin/check.pl
+bin/init.pl
 Changes
 ignore.txt
 lib/MD5Check.pm
