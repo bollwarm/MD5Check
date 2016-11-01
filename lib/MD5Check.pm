@@ -43,6 +43,7 @@ our $VERSION = '0.06';
 
 需要安装该模块，简单通过 cpanm MD5Check 安装。
 
+## 相关实例可以直接使用bin/下的init.pl 和 check.pl 单行执行
     $ perl -MMD5Check -e 'print md5init("/web")' >file
     $ perl -MMD5Check -e 'print md5check(file) perl -MMD5Check -e 'md5check(file)'..
 

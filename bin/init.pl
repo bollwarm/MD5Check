@@ -3,7 +3,6 @@
 use warnings;
 use strict;
 use POSIX qw(strftime);
-use Digest::MD5;
 use MD5Check;
 
 use utf8;

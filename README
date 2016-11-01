@@ -24,6 +24,7 @@ MD5Check - Use it for init Web files's md5 values of your site(or other dir), an
 
 ## perl filemd5check.pl  webmd5-20160920。
 
+## 详细实例，见bin目录下的 init.pl 和 check.pl
 ## oneliner，perl单行程序实现功能。
 
 需要安装该模块，简单通过 cpanm MD5Check 安装。
