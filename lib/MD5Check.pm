@@ -6,8 +6,8 @@ use utf8;
 use Digest::MD5;
 require Exporter;
 
-our @ISA     = qw(Exporter);
-our @EXPORT  = qw(md5init md5check);
+our @ISA    = qw(Exporter);
+our @EXPORT = qw(md5init md5check);
 
 =head1 NAME
 
@@ -22,7 +22,6 @@ Version 0.06
 =cut
 
 our $VERSION = '0.06';
-
 
 =head1 SYNOPSIS
 
@@ -39,84 +38,93 @@ our $VERSION = '0.06';
     my $mydir=shift;
     print md5check($mydir);
 
-    # oneliner，perl单行程序实现功能。
+# oneliner，perl单行程序实现功能。
 
 需要安装该模块，简单通过 cpanm MD5Check 安装。
 
 ## 相关实例可以直接使用bin/下的init.pl 和 check.pl 单行执行
+
     $ perl -MMD5Check -e 'print md5init("/web")' >file
     $ perl -MMD5Check -e 'print md5check(file) perl -MMD5Check -e 'md5check(file)'..
 
 
 =cut
-my $DEBUG=0;
+
+my $DEBUG = 0;
+
 sub md5_sum {
 
- my ($file_name,$mode)=@_;
- my ($FD,$ctx, $md5);
-   open ($FD,$file_name) or die "Can't open /'$file_name/': $!";
-     $ctx = Digest::MD5->new;
-       binmode($FD) if $mode;
-     $ctx->addfile($FD) || die "$!\n";
+    my ( $file_name, $mode ) = @_;
+    my ( $FD, $ctx, $md5 );
+    open( $FD, $file_name ) or die "Can't open /'$file_name/': $!";
+    $ctx = Digest::MD5->new;
+    binmode($FD) if $mode;
+    $ctx->addfile($FD) || die "$!\n";
     $md5 = $ctx->hexdigest;
-   close $FD;
- return $md5;
+    close $FD;
+    return $md5;
 }
 
 sub md5check {
-my $file=shift;
-open(my $fd, '<',$file) or die "$file: $!\n";
-my $res.=$file."\n";
-while (<$fd>){
-        my ($name, $sum) = split /\s+/;
+    my $file = shift;
+    open( my $fd, '<', $file ) or die "$file: $!\n";
+    my $res .= $file . "\n";
+    while (<$fd>) {
+        my ( $name, $sum ) = split /\s+/;
         $name =~ s/^\*//;
-        if ($sum eq md5_sum($name,1)){
-                $res.= "$name OK\n";
+        if ( $sum eq md5_sum( $name, 1 ) ) {
+            $res .= "$name OK\n";
         }
-        else{
-          $res.= "$name FAILED\n";
+        else {
+            $res .= "$name FAILED\n";
         }
+    }
+
+    close $fd;
+
+    return $res;
 }
 
-close $fd;
-
-return $res;
-}
 # 遍历目录计算md5值
 sub md5init {
 
-    my $fd=shift;
+    my $fd = shift;
     my $md5value;
     my $res;
-    if ( -f $fd ){
-            if ( -T $fd ) {
-                #print "按照文本模式进行计算MD5!\n";
-                $md5value =md5_sum($fd,0);
-                $res.= "$fd\t$md5value\n";
-            }elsif( -B $fd ){
-                #print "二进制文件用binmod计算MD5!\n";
-                $md5value =md5_sum($fd,1);
-                $res.= "$fd\t$md5value\n";
-            }else{
-                #print "其他文件，按照bimmod计算!\n";
-                $md5value = md5_sum($fd,1);
-                $res.= "$fd\t$md5value\n";
-            }
-     }
-     elsif( -d $fd ){
-        my $file_md5;
-      print "开始验证目录下所有文件:\n";
-       opendir (my $DH,$fd) or die "Can't open dir $fd: $!";
-         for(readdir $DH ){
-         my $file=$fd.'/'.$_;
-      # 上级目录..，本目录. 以及连接文件跳过
-         next if ($file =~ m{/.$} || $file =~ m{/..$} || -l $file );
-         $res.=md5init($file);
-          print "Debug::",$res if $DEBUG;
+    if ( -f $fd ) {
+        if ( -T $fd ) {
+
+            #print "按照文本模式进行计算MD5!\n";
+            $md5value = md5_sum( $fd, 0 );
+            $res .= "$fd\t$md5value\n";
         }
-       closedir $DH;
+        elsif ( -B $fd ) {
+
+            #print "二进制文件用binmod计算MD5!\n";
+            $md5value = md5_sum( $fd, 1 );
+            $res .= "$fd\t$md5value\n";
+        }
+        else {
+            #print "其他文件，按照bimmod计算!\n";
+            $md5value = md5_sum( $fd, 1 );
+            $res .= "$fd\t$md5value\n";
+        }
     }
-return $res;
+    elsif ( -d $fd ) {
+        my $file_md5;
+        print "开始验证目录下所有文件:\n";
+        opendir( my $DH, $fd ) or die "Can't open dir $fd: $!";
+        for ( readdir $DH ) {
+            my $file = $fd . '/' . $_;
+
+            # 上级目录..，本目录. 以及连接文件跳过
+            next if ( $file =~ m{/.$} || $file =~ m{/..$} || -l $file );
+            $res .= md5init($file);
+            print "Debug::", $res if $DEBUG;
+        }
+        closedir $DH;
+    }
+    return $res;
 }
 
 1;
@@ -179,7 +187,7 @@ automatically be notified of progress on your bug as I make changes.
 
 You can find documentation for this module with the perldoc command.
 
-    perldoc MD5Check
+ perldoc MD5Check
 
 
 You can also look for information at:
@@ -205,7 +213,4 @@ L<http://search.cpan.org/dist/MD5Check/>
 =back
 
 
-=head1 ACKNOWLEDGEMENTS
-
-
-1; # End of MD5Check
+# End of MD5Check

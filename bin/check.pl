@@ -7,6 +7,6 @@ use MD5Check;
 
 use utf8;
 
-my $pattern=shift;
+my $pattern = shift;
 print md5check($pattern);
 

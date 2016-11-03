@@ -7,24 +7,24 @@ use MD5Check;
 
 use utf8;
 
-if (@ARGV == 0) {
-warn "$0: 请输入需要初始化的目录!\n";
+if ( @ARGV == 0 ) {
+    warn "$0: 请输入需要初始化的目录!\n";
 }
 else {
-if (@ARGV > 1) {  
-warn "Usage: $0 目录名\n";
-}
+    if ( @ARGV > 1 ) {
+        warn "Usage: $0 目录名\n";
+    }
 }
 
-my $mydir=shift;
-$mydir=$ENV{'PWD'} if !defined($mydir) or $mydir="" or $mydir="./";
-my $month1=strftime "%m",localtime();
-my $day=strftime "%d",localtime();
-my $year=strftime "%Y",localtime();
-my $out=$mydir."/md5file-".$year.$month1.$day;
-open my $Ofile,">",$out or die $!;
+my $mydir = shift;
+$mydir = $ENV{'PWD'} if !defined($mydir) or $mydir = "" or $mydir = "./";
+my $month1 = strftime "%m", localtime();
+my $day    = strftime "%d", localtime();
+my $year   = strftime "%Y", localtime();
+my $out    = $mydir . "/md5file-" . $year . $month1 . $day;
+open my $Ofile, ">", $out or die $!;
 
-my $result=md5init($mydir);
+my $result = md5init($mydir);
 
 print $Ofile $result;
 

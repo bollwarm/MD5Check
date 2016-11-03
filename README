@@ -32,27 +32,23 @@ MD5Check - Use it for init Web files's md5 values of your site(or other dir), an
     $ perl -MMD5Check -e 'print md5init("/web")' >file
     $ perl -MMD5Check -e 'print md5check(file)'
  
-=head1 DESCRIPTION
+###  DESCRIPTION
  
-MD5Check - Use it for init Web files's md5 values of your site(or other dir), and check if it changed.
+ MD5Check - Use it for init Web files's md5 values of your site(or other dir), and check if it changed.
  
-MD5Check is not standardized. This module is far from complete.
- 
- 
+ MD5Check is not standardized. This module is far from complete.
      
-=head1 Git repo
+### Git repo
  
-[github](https://github.com/bollwarm/MD5Check)
+[github] (https://github.com/bollwarm/MD5Check)
  
-=head1 AUTHOR
+###  AUTHOR
  
 [orange] <linzhe@ijz.me>,[blog](http://ijz.me)
  
-=head1 COPYRIGHT AND LICENSE
+### COPYRIGHT AND LICENSE
  
 Copyright (C) 2016 linzhe
  
 This library is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself.
- 
-=cut
