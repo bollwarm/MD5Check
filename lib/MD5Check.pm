@@ -21,7 +21,7 @@ Version 0.06
 
 =cut
 
-our $VERSION = '0.06';
+our $VERSION = '0.07';
 
 =head1 SYNOPSIS
 
@@ -56,18 +56,25 @@ sub md5_sum {
 
     my ( $file_name, $mode ) = @_;
     my ( $FD, $ctx, $md5 );
-    open( $FD, $file_name ) or die "Can't open /'$file_name/': $!";
+    eval {open( $FD, $file_name ) or warn  "Can't open $file_name !";
+    #$ctx = Digest::MD5->new;
+    #binmode($FD) if $mode;
+    #$ctx->addfile($FD) or warn "$!\n";
+    #$md5 = $ctx->hexdigest;
+     };
+   unless($@) { 
     $ctx = Digest::MD5->new;
     binmode($FD) if $mode;
-    $ctx->addfile($FD) || die "$!\n";
+    $ctx->addfile($FD) or warn "$!\n";
     $md5 = $ctx->hexdigest;
-    close $FD;
-    return $md5;
+   close $FD if $FD; 
+   return $md5;
+   }
 }
 
 sub md5check {
     my $file = shift;
-    open( my $fd, '<', $file ) or die "$file: $!\n";
+    open( my $fd, '<', $file ) or warn "$file: $!\n";
     my $res .= $file . "\n";
     while (<$fd>) {
         my ( $name, $sum ) = split /\s+/;
@@ -89,37 +96,38 @@ sub md5check {
 sub md5init {
 
     my $fd = shift;
-    my $md5value;
     my $res;
     if ( -f $fd ) {
         if ( -T $fd ) {
 
             #print "按照文本模式进行计算MD5!\n";
-            $md5value = md5_sum( $fd, 0 );
-            $res .= "$fd\t$md5value\n";
+           my $md5value = md5_sum( $fd, 0 );
+            return "$fd\t$md5value\n" if $md5value ;
         }
         elsif ( -B $fd ) {
 
             #print "二进制文件用binmod计算MD5!\n";
-            $md5value = md5_sum( $fd, 1 );
-            $res .= "$fd\t$md5value\n";
+            my $md5value = md5_sum( $fd, 1 );
+            return "$fd\t$md5value\n" if $md5value;
         }
         else {
             #print "其他文件，按照bimmod计算!\n";
-            $md5value = md5_sum( $fd, 1 );
-            $res .= "$fd\t$md5value\n";
+            my $md5value = md5_sum( $fd, 1 );
+           return "$fd\t$md5value\n" if $md5value;
         }
     }
     elsif ( -d $fd ) {
         my $file_md5;
-        print "开始验证目录下所有文件:\n";
-        opendir( my $DH, $fd ) or die "Can't open dir $fd: $!";
+        print "init for all files $fd:\n";
+        opendir( my $DH, $fd ) or warn "Can't open dir $fd: $!";
         for ( readdir $DH ) {
             my $file = $fd . '/' . $_;
-
             # 上级目录..，本目录. 以及连接文件跳过
             next if ( $file =~ m{/.$} || $file =~ m{/..$} || -l $file );
-            $res .= md5init($file);
+            eval {$res .= md5init($file);};
+            if ($@) {
+              print "some wron for init $file\n ";
+            }
             print "Debug::", $res if $DEBUG;
         }
         closedir $DH;

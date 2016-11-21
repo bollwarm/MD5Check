@@ -17,11 +17,15 @@ else {
 }
 
 my $mydir = shift;
-$mydir = $ENV{'PWD'} if !defined($mydir) or $mydir = "" or $mydir = "./";
+print "$mydir \n";
+
+$mydir = $ENV{'PWD'} if !defined($mydir);
+
 my $month1 = strftime "%m", localtime();
 my $day    = strftime "%d", localtime();
 my $year   = strftime "%Y", localtime();
 my $out    = $mydir . "/md5file-" . $year . $month1 . $day;
+
 open my $Ofile, ">", $out or die $!;
 
 my $result = md5init($mydir);
