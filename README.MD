@@ -12,12 +12,15 @@ MD5Check - Use it for init Web files's md5 values of your site(or other dir), an
  
 ### 初始化目录md5值,参数为要监控的目录 
 
+新版本中，对初始化信息输出是实时输出到文件，需要自己定义输出文件句柄，可见bin/init.pl
+ 
     my $mydir=shift;
     print  md5init($mydir,$OutFD);
 
+
 ### 使用方法，初始化MD5值 
 
-   生成执行文件，保存为fileinit.pl然后执行 perl fileinit.pl web目录  > webmd5-20160920
+   生成执行文件，保存为fileinit.pl然后执行 perl fileinit.pl web目录
 
 ### 检查目录
 
