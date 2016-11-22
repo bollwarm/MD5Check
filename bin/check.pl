@@ -8,5 +8,6 @@ use MD5Check;
 use utf8;
 
 my $pattern = shift;
+print $pattern,"\n";
 print md5check($pattern);
 

@@ -1,5 +1,9 @@
 Revision history for MD5Check
 
+0.08    2016-11-22/19
+* fix check function bugs
+* change the init outer ways.
+
 0.07    2016-11-21/19
 * bug fixes
 

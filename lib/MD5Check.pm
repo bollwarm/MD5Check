@@ -17,11 +17,11 @@ MD5Check -  Use it for init Web files's md5 values of your site(or other dir), a
 
 =head1 VERSION
 
-Version 0.06
+Version 0.08
 
 =cut
 
-our $VERSION = '0.07';
+our $VERSION = '0.08';
 
 =head1 SYNOPSIS
 
@@ -57,10 +57,6 @@ sub md5_sum {
     my ( $file_name, $mode ) = @_;
     my ( $FD, $ctx, $md5 );
     eval {open( $FD, $file_name ) or warn  "Can't open $file_name !";
-    #$ctx = Digest::MD5->new;
-    #binmode($FD) if $mode;
-    #$ctx->addfile($FD) or warn "$!\n";
-    #$md5 = $ctx->hexdigest;
      };
    unless($@) { 
     $ctx = Digest::MD5->new;
@@ -77,6 +73,7 @@ sub md5check {
     open( my $fd, '<', $file ) or warn "$file: $!\n";
     my $res .= $file . "\n";
     while (<$fd>) {
+        next if /$file/; # ignore the recode file itself
         my ( $name, $sum ) = split /\s+/;
         $name =~ s/^\*//;
         if ( $sum eq md5_sum( $name, 1 ) ) {
@@ -95,25 +92,25 @@ sub md5check {
 # 遍历目录计算md5值
 sub md5init {
 
-    my $fd = shift;
+    my ($fd,$outFD) = @_;
     my $res;
     if ( -f $fd ) {
         if ( -T $fd ) {
 
             #print "按照文本模式进行计算MD5!\n";
            my $md5value = md5_sum( $fd, 0 );
-            return "$fd\t$md5value\n" if $md5value ;
+            print $outFD  "$fd\t$md5value\n" ;
         }
         elsif ( -B $fd ) {
 
             #print "二进制文件用binmod计算MD5!\n";
             my $md5value = md5_sum( $fd, 1 );
-            return "$fd\t$md5value\n" if $md5value;
+            print $outFD "$fd\t$md5value\n";
         }
         else {
             #print "其他文件，按照bimmod计算!\n";
             my $md5value = md5_sum( $fd, 1 );
-           return "$fd\t$md5value\n" if $md5value;
+           print $outFD  "$fd\t$md5value\n";
         }
     }
     elsif ( -d $fd ) {
@@ -124,7 +121,7 @@ sub md5init {
             my $file = $fd . '/' . $_;
             # 上级目录..，本目录. 以及连接文件跳过
             next if ( $file =~ m{/.$} || $file =~ m{/..$} || -l $file );
-            eval {$res .= md5init($file);};
+            eval { md5init($file,$outFD);};
             if ($@) {
               print "some wron for init $file\n ";
             }
@@ -151,7 +148,7 @@ MD5Check is not standardized. This module is far from complete.
 
     use MD5Check;
     my $mydir=shift;
-    print  md5init($mydir);
+    print  md5init($mydir,$OUT);
 =====================
 #check files 
 

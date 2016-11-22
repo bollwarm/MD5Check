@@ -13,7 +13,7 @@ MD5Check - Use it for init Web files's md5 values of your site(or other dir), an
 ### 初始化目录md5值,参数为要监控的目录 
 
     my $mydir=shift;
-    print  md5init($mydir);
+    print  md5init($mydir,$OutFD);
 
 ### 使用方法，初始化MD5值 
 
