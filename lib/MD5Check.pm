@@ -7,7 +7,7 @@ use Digest::MD5;
 require Exporter;
 
 our @ISA    = qw(Exporter);
-our @EXPORT = qw(md5init md5check);
+our @EXPORT = qw(init md5init md5check);
 
 =head1 NAME
 
@@ -17,11 +17,11 @@ MD5Check -  Use it for init Web files's md5 values of your site(or other dir), a
 
 =head1 VERSION
 
-Version 0.08
+Version 0.09
 
 =cut
 
-our $VERSION = '0.08';
+our $VERSION = '0.09';
 
 =head1 SYNOPSIS
 
@@ -30,7 +30,7 @@ our $VERSION = '0.08';
 ## 初始化目录md5值,参数为要监控的目录
 
     my $mydir=shift;
-    print md5init($mydir);
+    print init($mydir);
 
 ## 对目录文件进行检查，只需输入之前保存的md5 文件值。
 
@@ -44,8 +44,8 @@ our $VERSION = '0.08';
 
 ## 相关实例可以直接使用bin/下的init.pl 和 check.pl 单行执行
 
-    $ perl -MMD5Check -e 'print md5init("/web")' >file
-    $ perl -MMD5Check -e 'print md5check(file) perl -MMD5Check -e 'md5check(file)'..
+    $ perl -MMD5Check -e 'init("/web")' >file
+    $ perl -MMD5Check -e 'print md5check(file)'..
 
 
 =cut
@@ -90,6 +90,46 @@ sub md5check {
 }
 
 # 遍历目录计算md5值
+
+sub init {
+    # 仅仅用来打印init信息
+    my ($fd) = @_;
+    my $res;
+    if ( -f $fd ) {
+        if ( -T $fd ) {
+
+            #print "按照文本模式进行计算MD5!\n";
+           my $md5value = md5_sum( $fd, 0 );
+            print "$fd\t$md5value\n" ;
+        }
+        elsif ( -B $fd ) {
+
+            #print "二进制文件用binmod计算MD5!\n";
+            my $md5value = md5_sum( $fd, 1 );
+            print  "$fd\t$md5value\n";
+        }
+        else {
+            #print "其他文件，按照bimmod计算!\n";
+            my $md5value = md5_sum( $fd, 1 );
+           print  "$fd\t$md5value\n";
+        }
+    }
+    elsif ( -d $fd ) {
+        my $file_md5;
+        opendir( my $DH, $fd ) or warn "Can't open dir $fd: $!";
+        for ( readdir $DH ) {
+            my $file = $fd . '/' . $_;
+            # 上级目录..，本目录. 以及连接文件跳过
+            next if ( $file =~ m{/.$} || $file =~ m{/..$} || -l $file );
+            eval { init($file);};
+            if ($@) {
+            }
+        }
+        closedir $DH;
+    }
+}
+
+
 sub md5init {
 
     my ($fd,$outFD) = @_;

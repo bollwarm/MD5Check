@@ -37,7 +37,7 @@ MD5Check - Use it for init Web files's md5 values of your site(or other dir), an
 
 ###需要安装该模块，简单通过 cpanm MD5Check 安装。
 
-    $ perl -MMD5Check -e 'print md5init("/web")' >file
+    $ perl -MMD5Check -e 'init("/web")' >file
     $ perl -MMD5Check -e 'print md5check(file)'
  
 ##  DESCRIPTION

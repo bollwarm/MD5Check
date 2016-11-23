@@ -1,5 +1,9 @@
 Revision history for MD5Check
 
+0.09    2016-11-23/22
+
+* add init() function for simple use sum md5
+
 0.08    2016-11-22/19
 * fix check function bugs
 * change the init outer ways.
