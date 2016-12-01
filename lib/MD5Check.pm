@@ -9,6 +9,7 @@ require Exporter;
 our @ISA    = qw(Exporter);
 our @EXPORT = qw(init md5init md5check);
 
+=encoding utf8
 =head1 NAME
 
 MD5Check -  Use it for init Web files's md5 values of your site(or other dir), and check if it changed!
@@ -17,11 +18,11 @@ MD5Check -  Use it for init Web files's md5 values of your site(or other dir), a
 
 =head1 VERSION
 
-Version 0.09
+Version 0.010
 
 =cut
 
-our $VERSION = '0.09';
+our $VERSION = '0.010';
 
 =head1 SYNOPSIS
 
