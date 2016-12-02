@@ -2,7 +2,6 @@ package MD5Check;
 
 use strict;
 use warnings;
-use utf8;
 use Digest::MD5;
 require Exporter;
 

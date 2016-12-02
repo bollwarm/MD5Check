@@ -5,7 +5,6 @@ use strict;
 use POSIX qw(strftime);
 use MD5Check;
 
-use utf8;
 
 if ( @ARGV == 0 ) {
     warn "$0: 请输入需要初始化的目录!\n";

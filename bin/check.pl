@@ -5,7 +5,6 @@ use strict;
 use POSIX qw(strftime);
 use MD5Check;
 
-use utf8;
 
 my $pattern = shift;
 print $pattern,"\n";
