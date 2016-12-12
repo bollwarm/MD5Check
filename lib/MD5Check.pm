@@ -17,11 +17,11 @@ MD5Check -  Use it for init Web files's md5 values of your site(or other dir), a
 
 =head1 VERSION
 
-Version 0.010
+Version 0.011
 
 =cut
 
-our $VERSION = '0.010';
+our $VERSION = '0.011';
 
 =head1 SYNOPSIS
 
@@ -74,8 +74,8 @@ sub md5check {
     my $res .= $file . "\n";
     while (<$fd>) {
         next if /$file/; # ignore the recode file itself
-        my ( $name, $sum ) = split /\s+/;
-        $name =~ s/^\*//;
+        my ( $name, $sum ) = split /||/;
+        $name =~ s/^\#//;
         if ( $sum eq md5_sum( $name, 1 ) ) {
             $res .= "$name OK\n";
         }
@@ -100,18 +100,18 @@ sub init {
 
             #print "按照文本模式进行计算MD5!\n";
            my $md5value = md5_sum( $fd, 0 );
-            print "$fd\t$md5value\n" ;
+            print "$fd||$md5value\n" ;
         }
         elsif ( -B $fd ) {
 
             #print "二进制文件用binmod计算MD5!\n";
             my $md5value = md5_sum( $fd, 1 );
-            print  "$fd\t$md5value\n";
+            print  "$fd||$md5value\n";
         }
         else {
             #print "其他文件，按照bimmod计算!\n";
             my $md5value = md5_sum( $fd, 1 );
-           print  "$fd\t$md5value\n";
+           print  "$fd||$md5value\n";
         }
     }
     elsif ( -d $fd ) {
@@ -139,18 +139,18 @@ sub md5init {
 
             #print "按照文本模式进行计算MD5!\n";
            my $md5value = md5_sum( $fd, 0 );
-            print $outFD  "$fd\t$md5value\n" ;
+            print $outFD  "$fd||$md5value\n" ;
         }
         elsif ( -B $fd ) {
 
             #print "二进制文件用binmod计算MD5!\n";
             my $md5value = md5_sum( $fd, 1 );
-            print $outFD "$fd\t$md5value\n";
+            print $outFD "$fd||$md5value\n";
         }
         else {
             #print "其他文件，按照bimmod计算!\n";
             my $md5value = md5_sum( $fd, 1 );
-           print $outFD  "$fd\t$md5value\n";
+           print $outFD  "$fd||$md5value\n";
         }
     }
     elsif ( -d $fd ) {

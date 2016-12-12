@@ -1,8 +1,12 @@
 Revision history for MD5Check
 
+0.011    2016-12-12/17
+
+* fix dir path's blank error
+
 0.010    2016-12-01/17
 
-* fox pod error
+* fix pod error
 
 0.09    2016-11-23/22
 
