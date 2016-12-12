@@ -73,8 +73,12 @@ sub md5check {
     open( my $fd, '<', $file ) or warn "$file: $!\n";
     my $res .= $file . "\n";
     while (<$fd>) {
+        chomp;
         next if /$file/; # ignore the recode file itself
-        my ( $name, $sum ) = split /||/;
+        my ( $name, $sum ) = split /\|\|/;
+        print $name,"\n" if $DEBUG;
+        print $sum,"\n" if $DEBUG;
+        print md5_sum( $name, 1 ),"\n" if $DEBUG;
         $name =~ s/^\#//;
         if ( $sum eq md5_sum( $name, 1 ) ) {
             $res .= "$name OK\n";
