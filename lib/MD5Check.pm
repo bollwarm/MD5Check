@@ -17,11 +17,11 @@ MD5Check -  Use it for init Web files's md5 values of your site(or other dir), a
 
 =head1 VERSION
 
-Version 0.011
+Version 0.11
 
 =cut
 
-our $VERSION = '0.011';
+our $VERSION = '0.11';
 
 =head1 SYNOPSIS
 
@@ -56,8 +56,7 @@ sub md5_sum {
 
     my ( $file_name, $mode ) = @_;
     my ( $FD, $ctx, $md5 );
-    eval {open( $FD, $file_name ) or warn  "Can't open $file_name !";
-     };
+    eval {open( $FD, $file_name ) or warn  "Can't open $file_name !";};
    unless($@) { 
     $ctx = Digest::MD5->new;
     binmode($FD) if $mode;
