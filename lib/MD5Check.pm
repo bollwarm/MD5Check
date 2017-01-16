@@ -158,7 +158,7 @@ sub md5init {
     }
     elsif ( -d $fd ) {
         my $file_md5;
-        print "init for all files $fd:\n";
+        print "Init for all files $fd:\n";
         opendir( my $DH, $fd ) or warn "Can't open dir $fd: $!";
         for ( readdir $DH ) {
             my $file = $fd . '/' . $_;
@@ -166,7 +166,7 @@ sub md5init {
             next if ( $file =~ m{/.$} || $file =~ m{/..$} || -l $file );
             eval { md5init($file,$outFD);};
             if ($@) {
-              print "some wron for init $file\n ";
+              print "Some wrong for init $file\n ";
             }
             print "Debug::", $res if $DEBUG;
         }
