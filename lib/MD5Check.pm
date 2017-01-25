@@ -101,18 +101,18 @@ sub init {
     if ( -f $fd ) {
         if ( -T $fd ) {
 
-            #print "按照文本模式进行计算MD5!\n";
+            #print "按照文本模式计算MD5!\n";
            my $md5value = md5_sum( $fd, 0 );
             print "$fd||$md5value\n" ;
         }
         elsif ( -B $fd ) {
 
-            #print "二进制文件用binmod计算MD5!\n";
+            #print "二进制文件用binmod模式计算MD5!\n";
             my $md5value = md5_sum( $fd, 1 );
             print  "$fd||$md5value\n";
         }
         else {
-            #print "其他文件，按照bimmod计算!\n";
+            #print "其他文件，按照bimmod模式计算!\n";
             my $md5value = md5_sum( $fd, 1 );
            print  "$fd||$md5value\n";
         }
@@ -122,7 +122,7 @@ sub init {
         opendir( my $DH, $fd ) or warn "Can't open dir $fd: $!";
         for ( readdir $DH ) {
             my $file = $fd . '/' . $_;
-            # 上级目录..，本目录. 以及连接文件跳过
+            # 上级目录..，当前目录. 以及连接文件跳过
             next if ( $file =~ m{/.$} || $file =~ m{/..$} || -l $file );
             eval { init($file);};
             if ($@) {
@@ -146,12 +146,12 @@ sub md5init {
         }
         elsif ( -B $fd ) {
 
-            #print "二进制文件用binmod计算MD5!\n";
+            #print "二进制文件用binmod模式计算MD5!\n";
             my $md5value = md5_sum( $fd, 1 );
             print $outFD "$fd||$md5value\n";
         }
         else {
-            #print "其他文件，按照bimmod计算!\n";
+            #print "其他文件，按照bimmod模式计算!\n";
             my $md5value = md5_sum( $fd, 1 );
            print $outFD  "$fd||$md5value\n";
         }
