@@ -39,7 +39,8 @@ MD5Check - Use it for init Web files's md5 values of your site(or other dir), an
 
     $ perl -MMD5Check -e 'init("/web")' >file
     $ perl -MMD5Check -e 'print md5check(file)'
- 
+
+#### 新年快乐,Happy New Year! 
      
 ## Git repo
  
