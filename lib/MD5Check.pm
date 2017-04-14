@@ -105,12 +105,6 @@ sub init {
            my $md5value = md5_sum( $fd, 0 );
             print "$fd||$md5value\n" ;
         }
-        elsif ( -B $fd ) {
-
-            #print "二进制文件用binmod模式计算MD5!\n";
-            my $md5value = md5_sum( $fd, 1 );
-            print  "$fd||$md5value\n";
-        }
         else {
             #print "其他文件，按照bimmod模式计算!\n";
             my $md5value = md5_sum( $fd, 1 );
@@ -143,12 +137,6 @@ sub md5init {
             #print "按照文本模式进行计算MD5!\n";
            my $md5value = md5_sum( $fd, 0 );
             print $outFD  "$fd||$md5value\n" ;
-        }
-        elsif ( -B $fd ) {
-
-            #print "二进制文件用binmod模式计算MD5!\n";
-            my $md5value = md5_sum( $fd, 1 );
-            print $outFD "$fd||$md5value\n";
         }
         else {
             #print "其他文件，按照bimmod模式计算!\n";
